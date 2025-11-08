@@ -92,13 +92,13 @@ pipeline {
 
           echo "Verifying deployment rollout..."
           if ! kubectl rollout status deployment/aceest-fitness-deployment-blue --timeout=120s; then
-            echo "❌ Rollout failed! Initiating rollback..."
+            echo "Rollout failed! Initiating rollback..."
             kubectl rollout undo deployment/aceest-fitness-deployment-blue
             exit 1
           fi
 
           echo "Fetching Blue deployment pods..."
-          kubectl get pods -l version=blue || echo "⚠️ Unable to fetch pods"
+          kubectl get pods -l version=blue || echo "Unable to fetch pods"
         '''
       }
     }
@@ -114,52 +114,52 @@ pipeline {
 
           echo "Checking rollout status..."
           if ! kubectl rollout status deployment/aceest-fitness-a --timeout=120s; then
-            echo "❌ Deployment A failed. Rolling back..."
+            echo " Deployment A failed. Rolling back..."
             kubectl rollout undo deployment/aceest-fitness-a
             exit 1
           fi
 
           if ! kubectl rollout status deployment/aceest-fitness-b --timeout=120s; then
-            echo "❌ Deployment B failed. Rolling back..."
+            echo " Deployment B failed. Rolling back..."
             kubectl rollout undo deployment/aceest-fitness-b
             exit 1
           fi
 
-          echo "✅ All A/B Testing deployments successful!"
+          echo " All A/B Testing deployments successful!"
           kubectl get pods -l app=aceest-fitness
         '''
       }
     }
 
     stage('Canary Deployment (Progressive Rollout)') {
-  steps {
-    sh '''
-      echo "🚀 Starting Canary deployment..."
-      kubectl apply -f k8s/canary-deployment.yaml --validate=false
-      kubectl apply -f k8s/service-canary.yaml --validate=false
+      steps {
+        sh '''
+          echo "🚀 Starting Canary deployment..."
+          kubectl apply -f k8s/canary-deployment.yaml --validate=false
+          kubectl apply -f k8s/service-canary.yaml --validate=false
 
-      echo "Monitoring Canary rollout..."
-      kubectl rollout status deployment/aceest-fitness-canary || echo "⚠️ Canary rollout check skipped"
+          echo "Monitoring Canary rollout..."
+          kubectl rollout status deployment/aceest-fitness-canary || echo " Canary rollout check skipped"
 
-      echo "Canary pods running:"
-      kubectl get pods -l version=canary
+          echo "Canary pods running:"
+          kubectl get pods -l version=canary
 
-      echo "✅ Canary deployment allows controlled rollout (10-20% traffic) before full release."
-    '''
-  }
-}
+          echo "Canary deployment allows controlled rollout (10-20% traffic) before full release."
+        '''
+     }
+    }
 
 stage('Shadow Deployment (Traffic Mirroring)') {
   steps {
     sh '''
-      echo "👥 Starting Shadow deployment..."
+      echo " Starting Shadow deployment..."
       kubectl apply -f k8s/shadow-deployment.yaml --validate=false
       kubectl apply -f k8s/ingress-shadow.yaml --validate=false
 
       echo "Shadow deployment runs parallelly for validation."
       kubectl get pods -l version=shadow
 
-      echo "✅ Shadow deployments receive mirrored live traffic for testing without affecting users."
+      echo " Shadow deployments receive mirrored live traffic for testing without affecting users."
     '''
   }
 }
