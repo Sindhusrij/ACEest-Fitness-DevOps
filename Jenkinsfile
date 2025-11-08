@@ -12,7 +12,7 @@ pipeline {
         checkout([$class: 'GitSCM',
           branches: [[name: '*/main']],
           userRemoteConfigs: [[
-            url: 'https://github.com/srilakshmikalaga/ACEest-Fitness-DevOps.git',
+            url: 'https://github.com/sindhujv/ACEest-Fitness-DevOps.git',
             credentialsId: 'github-token'
           ]]
         ])
@@ -50,7 +50,7 @@ pipeline {
           sh '''
             $SCANNER_HOME/bin/sonar-scanner \
             -Dsonar.projectKey=ACEest-Fitness-DevOps \
-            -Dsonar.organization=srilakshmikalaga \
+            -Dsonar.organization=sindhujv \
             -Dsonar.sources=. \
             -Dsonar.python.coverage.reportPaths=coverage.xml \
             -Dsonar.python.version=3.8 \
@@ -71,13 +71,13 @@ pipeline {
         withCredentials([string(credentialsId: 'docker-hub-password', variable: 'DOCKERHUB_TOKEN')]) {
           sh '''
             echo "🔹 Logging in to Docker Hub..."
-            echo "$DOCKERHUB_TOKEN" | docker login -u "srilakshmikalaga" --password-stdin
+            echo "$DOCKERHUB_TOKEN" | docker login -u "sindhujv" --password-stdin
 
             echo "🔹 Tagging image..."
-            docker tag aceest-fitness-app srilakshmikalaga/aceest-fitness-app:v${BUILD_NUMBER}
+            docker tag aceest-fitness-app sindhujv/aceest-fitness-app:v${BUILD_NUMBER}
 
             echo "🔹 Pushing image..."
-            docker push srilakshmikalaga/aceest-fitness-app:v${BUILD_NUMBER}
+            docker push sindhujv/aceest-fitness-app:v${BUILD_NUMBER}
           '''
         }
       }

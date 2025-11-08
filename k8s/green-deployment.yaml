@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: aceest-fitness-app
-        image: srilakshmikalaga/aceest-fitness-app:v44   # GREEN version
+        image: sindhujv/aceest-fitness-app:v44   # GREEN version
         ports:
         - containerPort: 5000
