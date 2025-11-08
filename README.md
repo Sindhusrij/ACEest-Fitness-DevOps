@@ -1,6 +1,6 @@
 # ACEest Fitness & Gym — DevOps CI/CD Pipeline
 
-## 📘 Project Overview
+## Project Overview
 **ACEest Fitness & Gym** is a digital transformation initiative for a modern fitness startup.  
 This project demonstrates a **fully automated DevOps CI/CD pipeline** built around the organization’s core Flask-based web application. The pipeline ensures continuous integration, testing, code quality validation, and automated containerized deployment using modern DevOps tools.
 
