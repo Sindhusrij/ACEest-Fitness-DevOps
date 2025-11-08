@@ -70,13 +70,13 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'docker-hub-password', variable: 'DOCKERHUB_TOKEN')]) {
           sh '''
-            echo "🔹 Logging in to Docker Hub..."
+            echo "Logging in to Docker Hub..."
             echo "$DOCKERHUB_TOKEN" | docker login -u "sindhujv" --password-stdin
 
-            echo "🔹 Tagging image..."
+            echo "Tagging image..."
             docker tag aceest-fitness-app sindhujv/aceest-fitness-app:v${BUILD_NUMBER}
 
-            echo "🔹 Pushing image..."
+            echo "Pushing image..."
             docker push sindhujv/aceest-fitness-app:v${BUILD_NUMBER}
           '''
         }
@@ -134,7 +134,7 @@ pipeline {
     stage('Canary Deployment (Progressive Rollout)') {
       steps {
         sh '''
-          echo "🚀 Starting Canary deployment..."
+          echo "Starting Canary deployment..."
           kubectl apply -f k8s/canary-deployment.yaml --validate=false
           kubectl apply -f k8s/service-canary.yaml --validate=false
 
@@ -149,20 +149,20 @@ pipeline {
      }
     }
 
-stage('Shadow Deployment (Traffic Mirroring)') {
-  steps {
-    sh '''
-      echo " Starting Shadow deployment..."
-      kubectl apply -f k8s/shadow-deployment.yaml --validate=false
-      kubectl apply -f k8s/ingress-shadow.yaml --validate=false
+    stage('Shadow Deployment (Traffic Mirroring)') {
+      steps {
+        sh '''
+          echo " Starting Shadow deployment..."
+          kubectl apply -f k8s/shadow-deployment.yaml --validate=false
+          kubectl apply -f k8s/ingress-shadow.yaml --validate=false
 
-      echo "Shadow deployment runs parallelly for validation."
-      kubectl get pods -l version=shadow
+          echo "Shadow deployment runs parallelly for validation."
+          kubectl get pods -l version=shadow
 
-      echo " Shadow deployments receive mirrored live traffic for testing without affecting users."
-    '''
-  }
-}
+          echo " Shadow deployments receive mirrored live traffic for testing without affecting users."
+        '''
+      }
+    }
 
   }
 }
