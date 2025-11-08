@@ -1,4 +1,4 @@
-# 🏋️ ACEest Fitness & Gym — DevOps CI/CD Pipeline
+# ACEest Fitness & Gym — DevOps CI/CD Pipeline
 
 ## 📘 Project Overview
 **ACEest Fitness & Gym** is a digital transformation initiative for a modern fitness startup.  
@@ -6,14 +6,14 @@ This project demonstrates a **fully automated DevOps CI/CD pipeline** built arou
 
 ---
 
-## 🚀 Objectives
+## Objectives
 - Apply DevOps principles to design and automate the end-to-end CI/CD lifecycle.
 - Integrate modern tools like **GitHub**, **Jenkins**, **SonarQube**, **Pytest**, **Docker**, and **Kubernetes**.
 - Implement quality validation, containerization, and automated deployments with rollback mechanisms.
 
 ---
 
-## 🧩 Tech Stack & Tools
+## Tech Stack & Tools
 
 | Category | Tool / Framework | Purpose |
 |-----------|------------------|----------|
@@ -21,14 +21,14 @@ This project demonstrates a **fully automated DevOps CI/CD pipeline** built arou
 | **Build Automation** | Jenkins | Continuous Integration (CI) |
 | **Testing** | Pytest | Unit and integration testing |
 | **Code Quality** | SonarQube | Static code analysis and quality gates |
-| **Containerization** | Docker / Podman | Application packaging |
-| **Container Registry** | Docker Hub / Quay.io | Image storage and versioning |
+| **Containerization** | Docker | Application packaging |
+| **Container Registry** | Docker Hub | Image storage and versioning |
 | **Orchestration** | Kubernetes / Minikube | Continuous Delivery (CD) |
 | **Programming Language** | Python (Flask) | Core web application |
 
 ---
 
-## ⚙️ CI/CD Pipeline Workflow
+## CI/CD Pipeline Workflow
 
 ### 1. **Version Control (Git + GitHub)**
 - Initialize repo: `git init`
@@ -87,7 +87,7 @@ Stage 7: Deploy to Kubernetes
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run locally before pushing:
 ```bash
@@ -101,7 +101,7 @@ sonar-scanner -Dsonar.projectKey=ACEest_Fitness
 
 ---
 
-## 🐳 Docker Usage
+## Docker Usage
 
 **Build and Run Locally:**
 ```bash
@@ -117,7 +117,7 @@ docker push <your-dockerhub-username>/aceest-fitness:v1.3
 
 ---
 
-## ☸️ Kubernetes Deployment
+## Kubernetes Deployment
 
 **Deploy Application:**
 ```bash
@@ -133,7 +133,7 @@ kubectl get svc
 
 ---
 
-## 🧠 Challenges & Mitigations
+## Challenges & Mitigations
 | Challenge | Mitigation |
 |------------|-------------|
 | Jenkins-SonarQube integration errors | Configured webhook and authentication token properly |
@@ -143,6 +143,6 @@ kubectl get svc
 
 ---
 
-## 🧾 Author
+## Author
 **Name:** *Sindhu*  
  
